@@ -1,4 +1,4 @@
-# covidAnalyze
+# covidAnalysis
 
 Tracks growth rates of coronavirus COVID-19 cases, based on data from
 [https://github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19)
