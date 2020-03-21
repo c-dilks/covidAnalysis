@@ -1,11 +1,11 @@
 void FormatGraph(TGraph * gr, TString title, unsigned int color);
 TString countryName;
 
-void plot(TString country="") {
+void plot(TString country="",Int_t startDay=0) {
   countryName=country;
   TTree * tr = new TTree("tr","tr");
   tr->ReadFile("table.dat","date/C:day/I:country/C:nC/F:nD/F:nR/F");
-  Int_t day;
+  Int_t day,endDay;
   Float_t nC,nD,nR,nA;
   tr->SetBranchAddress("day",&day);
   tr->SetBranchAddress("nC",&nC);
@@ -57,6 +57,15 @@ void plot(TString country="") {
     nRtmp = nR;
     nAtmp = nA;
   };
+  endDay = tr->GetMaximum("day");
+
+  gStyle->SetOptFit(0);
+  if(startDay>0) {
+    grGrowthC->Fit("pol4","","",startDay,endDay+10);
+    grGrowthD->Fit("pol4","","",startDay,endDay+10);
+    grGrowthR->Fit("pol4","","",startDay,endDay+10);
+    grGrowthA->Fit("pol4","","",startDay,endDay+10);
+  };
 
   TCanvas * canvLin = new TCanvas("canvLin","canvLin",1000,1000);
   TCanvas * canvLog = new TCanvas("canvLog","canvLog",1000,1000);
@@ -87,6 +96,10 @@ void plot(TString country="") {
   canvGrowth->cd(2); grGrowthD->Draw("AP");
   canvGrowth->cd(3); grGrowthR->Draw("AP");
   canvGrowth->cd(4); grGrowthA->Draw("AP");
+  grGrowthC->GetXaxis()->SetRangeUser(startDay>0?startDay-5:0,endDay+10);
+  grGrowthD->GetXaxis()->SetRangeUser(startDay>0?startDay-5:0,endDay+10);
+  grGrowthR->GetXaxis()->SetRangeUser(startDay>0?startDay-5:0,endDay+10);
+  grGrowthA->GetXaxis()->SetRangeUser(startDay>0?startDay-5:0,endDay+10);
 };
 
 void FormatGraph(TGraph * gr, TString title, unsigned int color) {
