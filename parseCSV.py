@@ -17,7 +17,7 @@ with open(filename) as csvFile:
     nD=0
     nR=0
     for row in csvReader:
-        if(daynum<83):
+        if(daynum<82):
             region,country,update,nCstr,nDstr,nRstr = row[0],row[1],row[2],row[3],row[4],row[5]
         else:
             fips,admin2,region,country,update,lat,lon,nCstr,nDstr,nRstr,key =\
