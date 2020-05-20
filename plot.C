@@ -4,7 +4,7 @@ TString countryName;
 void plot(TString country="",Int_t startDay=0) {
   countryName=country;
   TTree * tr = new TTree("tr","tr");
-  tr->ReadFile("table.dat","date/C:day/I:country/C:nC/F:nD/F:nR/F");
+  tr->ReadFile("table.dat","date/C:day/I:nC/F:nD/F:nR/F");
   Int_t day,endDay;
   Float_t nC,nD,nR,nA;
   tr->SetBranchAddress("day",&day);
@@ -79,7 +79,7 @@ void plot(TString country="",Int_t startDay=0) {
   Int_t inflectionDay = 0;
   Float_t nCinflection = 0;
   Double_t dd,nn;
-  TString poly = "pol1";
+  TString poly = "pol3";
   if(startDay>0) {
     grGrowthC->Fit(poly,"Q","",startDay,endDay+extrapolateDay);
     grGrowthD->Fit(poly,"Q","",startDay,endDay+extrapolateDay);

@@ -4,14 +4,16 @@ if [ $# -eq 0 ]; then
   exit;
 fi
 
-country=$1
-startday=0
-if [ $# -gt 1 ]; then startday=$2; fi
+country="$1"
+#startday=0
+#if [ $# -gt 1 ]; then startday=$2; fi
+if [ $# -gt 1 ]; then region=$2; fi
 
 table="table.dat"
 > $table
 for file in data/*.csv; do
-  python parseCSV.py $file $country | tee -a $table
+  python parseCSV.py $file "$country" "$region" | tee -a $table
 done
 
-root -l plot.C'("'${country}'",'${startday}')'
+#root -l plot.C'("'"${country}"'",'${startday}')'
+root -l plot.C'("'"${country} ${region}"'")'

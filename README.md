@@ -17,7 +17,5 @@ on day N-1.
 * plot data: `analyse.sh __country__`
   * example: `analyse.sh Italy`
   * example: `analyse.sh US`
-  * an optional second argument may be passed: this is the day number 
-    used to specify the starting day of the growth factor curve fit
-    * example: `analysis.sh US 57`
-
+  * an optional second argument may be passed to specify a "region", e.g, state
+  * surround country names or state names with quotes, if they have more than one word
